@@ -1,17 +1,54 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.main')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+@section('content')
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-amalfi-tile">Dashboard</h2>
+        <p class="text-gray-600">Selamat datang di Sistem Informasi Akademik.</p>
+    </div>
+
+    @if(Auth::user()->role === 'admin')
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        
+        <div class="bg-white rounded-xl shadow-sm border-l-4 border-amalfi-tile p-6 flex items-center">
+            <div class="flex-1">
+                <div class="text-sm text-gray-500 font-semibold uppercase">Total Dosen</div>
+                <div class="text-3xl font-bold text-amalfi-tile mt-1">{{ $totalDosen }}</div>
+            </div>
+            <div class="p-3 bg-sea-breeze/20 rounded-full text-amalfi-tile">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border-l-4 border-citrus-zest p-6 flex items-center">
+            <div class="flex-1">
+                <div class="text-sm text-gray-500 font-semibold uppercase">Total Mahasiswa</div>
+                <div class="text-3xl font-bold text-citrus-zest mt-1">{{ $totalMahasiswa }}</div>
+            </div>
+            <div class="p-3 bg-cream-gelato rounded-full text-citrus-zest">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border-l-4 border-sea-breeze p-6 flex items-center">
+            <div class="flex-1">
+                <div class="text-sm text-gray-500 font-semibold uppercase">Total Mata Kuliah</div>
+                <div class="text-3xl font-bold text-amalfi-tile mt-1">{{ $totalMatakuliah }}</div>
+            </div>
+            <div class="p-3 bg-sea-breeze/30 rounded-full text-amalfi-tile">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
             </div>
         </div>
     </div>
-</x-app-layout>
+    @endif
+
+    @if(Auth::user()->role === 'mahasiswa')
+    <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-amalfi-tile">
+        <h3 class="text-lg font-bold text-gray-800 mb-2">Informasi Mahasiswa</h3>
+        <p class="text-gray-600 mb-4">Pastikan Anda selalu mengecek jadwal perkuliahan secara berkala dan mengisi Kartu Rencana Studi (KRS) pada masa registrasi.</p>
+        <a href="{{ route('krs.index') }}" class="inline-block bg-amalfi-tile hover:opacity-90 text-white px-5 py-2 rounded-lg font-medium transition shadow-md">
+            Lihat KRS Saya
+        </a>
+    </div>
+    @endif
+
+@endsection

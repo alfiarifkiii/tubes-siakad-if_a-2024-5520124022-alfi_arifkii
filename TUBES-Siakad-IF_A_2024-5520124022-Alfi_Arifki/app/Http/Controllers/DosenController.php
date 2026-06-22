@@ -2,63 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // 1. Menampilkan daftar dosen (READ)
     public function index()
     {
-        //
+        // Mengambil semua data dosen
+        $dosens = Dosen::all(); 
+        return view('dosen.index', compact('dosens'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // 2. Menampilkan form tambah data
     public function create()
     {
-        //
+        return view('dosen.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // 3. Menyimpan data ke database (CREATE)
     public function store(Request $request)
     {
-        //
+        // Validasi Laravel (Syarat Wajib Tugas)
+        $request->validate([
+            'nidn' => 'required|size:10|unique:dosens,nidn',
+            'nama' => 'required|string|max:50',
+        ], [
+            'nidn.required' => 'NIDN wajib diisi.',
+            'nidn.unique' => 'NIDN sudah terdaftar.',
+            'nidn.size' => 'NIDN harus tepat 10 karakter.',
+            'nama.required' => 'Nama dosen wajib diisi.',
+        ]);
+
+        Dosen::create($request->all());
+
+        return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // 4. Menampilkan form edit data
+    public function edit($nidn)
     {
-        //
+        $dosen = Dosen::findOrFail($nidn);
+        return view('dosen.edit', compact('dosen'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // 5. Menyimpan perubahan data (UPDATE)
+    public function update(Request $request, $nidn)
     {
-        //
+        $dosen = Dosen::findOrFail($nidn);
+
+        $request->validate([
+            'nama' => 'required|string|max:50',
+        ]);
+
+        $dosen->update([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // 6. Menghapus data (DELETE)
+    public function destroy($nidn)
     {
-        //
-    }
+        $dosen = Dosen::findOrFail($nidn);
+        $dosen->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil dihapus!');
     }
 }
