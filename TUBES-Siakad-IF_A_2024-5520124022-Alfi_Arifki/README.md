@@ -75,7 +75,7 @@ Berikut adalah tampilan antarmuka dari aplikasi SIAKAD Sederhana:
 ### 9. Halaman KRS Mahasiswa & Fitur Export PDF
 ![KRS Mahasiswa](screenshot/krs.png)
 
-*(Catatan untuk pengembang: Pastikan untuk menyimpan gambar *screenshot* aplikasi ke dalam folder `screenshot/` dan beri nama sesuai dengan tautan di atas: `login.png`, `dashboard.png`, `data-mahasiswa.png`, `jadwal.png`, dan `krs.png`)*
+*(Alfi Arifki - IF A 2024 - 5520124022)*
 
 ---
 
