@@ -31,10 +31,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // JALUR KHUSUS MAHASISWA
     Route::middleware(['role:mahasiswa'])->group(function () {
-        // Mahasiswa melihat jadwal (Bukan kelola/CRUD)
         Route::get('/jadwalku', [JadwalController::class, 'jadwalMahasiswa'])->name('jadwal.mahasiswa');
         
-        // Mahasiswa mengelola KRS
+        // Tambahan Rute Cetak PDF
+        Route::get('/krs/pdf', [KrsController::class, 'cetakPdf'])->name('krs.pdf');
+        
         Route::resource('krs', KrsController::class);
     });
 
