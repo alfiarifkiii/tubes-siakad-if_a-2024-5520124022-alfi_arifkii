@@ -26,20 +26,20 @@ class DatabaseSeeder extends Seeder
         // 2. Buat Data Master Dosen
         Dosen::create([
             'nidn' => '1122334455',
-            'nama' => 'Dr. Budi Santoso, M.Kom',
+            'nama' => 'Dr. Arifki Alfi, M.Kom',
         ]);
 
         // 3. Buat Data Master Mahasiswa
         Mahasiswa::create([
             'npm' => '1002003001',
             'nidn' => '1122334455', // Relasi: Dosen walinya Pak Budi
-            'nama' => 'Andi Pratama',
+            'nama' => 'Alfi Arifki',
         ]);
 
         // 4. Buat Akun Login Khusus Mahasiswa tersebut
         User::create([
-            'name' => 'Andi Pratama',
-            'email' => 'andi@siakad.com',
+            'name' => 'Alfi Arifki',
+            'email' => 'alfi@siakad.com',
             'password' => 'password',
             'role' => 'mahasiswa',
             'npm' => '1002003001', // Relasi: Tersambung ke data mahasiswa
