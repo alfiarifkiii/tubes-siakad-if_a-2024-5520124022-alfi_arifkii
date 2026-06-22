@@ -1,14 +1,22 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
             <h2 class="text-2xl font-bold text-amalfi-tile">Data Master Dosen</h2>
             <p class="text-gray-600">Kelola data dosen pengajar di sini.</p>
         </div>
-        <a href="{{ route('dosen.create') }}" class="bg-amalfi-tile hover:bg-sea-breeze hover:text-amalfi-tile text-white px-4 py-2 rounded-lg font-medium transition shadow-sm">
-            + Tambah Dosen
-        </a>
+        
+        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full md:w-auto">
+            <form action="{{ route('dosen.index') }}" method="GET" class="flex w-full sm:w-auto shadow-sm">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari NIDN / Nama..." class="border-gray-300 rounded-l-lg focus:ring-amalfi-tile focus:border-amalfi-tile px-4 py-2 w-full sm:w-56 text-sm">
+                <button type="submit" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-r-lg hover:bg-gray-300 transition text-sm font-medium border border-gray-300 border-l-0">Cari</button>
+            </form>
+
+            <a href="{{ route('dosen.create') }}" class="bg-amalfi-tile hover:bg-sea-breeze hover:text-amalfi-tile text-white px-4 py-2 rounded-lg font-medium transition shadow-sm text-sm whitespace-nowrap flex items-center justify-center">
+                + Tambah Dosen
+            </a>
+        </div>
     </div>
 
     @if(session('success'))

@@ -7,14 +7,19 @@ use Illuminate\Http\Request;
 
 class DosenController extends Controller
 {
-    // 1. Menampilkan daftar dosen (READ)
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data dosen
-        $dosens = Dosen::all(); 
+        // Menangkap kata kunci dari form pencarian
+        $search = $request->search;
+
+        // Memfilter data jika ada pencarian, jika tidak tampilkan semua
+        $dosens = Dosen::when($search, function ($query, $search) {
+            return $query->where('nidn', 'like', "%{$search}%")
+                         ->orWhere('nama', 'like', "%{$search}%");
+        })->get(); 
+
         return view('dosen.index', compact('dosens'));
     }
-
     // 2. Menampilkan form tambah data
     public function create()
     {

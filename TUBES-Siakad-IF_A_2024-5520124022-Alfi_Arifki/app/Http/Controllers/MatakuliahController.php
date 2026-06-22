@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class MatakuliahController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $matakuliahs = Matakuliah::all();
+        $search = $request->search;
+
+        $matakuliahs = Matakuliah::when($search, function ($query, $search) {
+            return $query->where('kode_matakuliah', 'like', "%{$search}%")
+                         ->orWhere('nama_matakuliah', 'like', "%{$search}%");
+        })->get();
+
         return view('matakuliah.index', compact('matakuliahs'));
     }
 

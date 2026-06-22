@@ -11,10 +11,20 @@ use Illuminate\Support\Facades\Hash;
 class MahasiswaController extends Controller
 {
     // 1. Menampilkan daftar mahasiswa beserta nama dosen walinya
-    public function index()
+    public function index(Request $request)
     {
-        // 'with('dosen')' digunakan untuk memanggil relasi (Eager Loading) agar loading lebih cepat
-        $mahasiswas = Mahasiswa::with('dosen')->get();
+        $search = $request->search;
+
+        $mahasiswas = Mahasiswa::with('dosen')
+            ->when($search, function ($query, $search) {
+                return $query->where('npm', 'like', "%{$search}%")
+                             ->orWhere('nama', 'like', "%{$search}%")
+                             // Pencarian berdasarkan nama Dosen Wali
+                             ->orWhereHas('dosen', function($q) use ($search) {
+                                 $q->where('nama', 'like', "%{$search}%");
+                             });
+            })->get();
+
         return view('mahasiswa.index', compact('mahasiswas'));
     }
 
