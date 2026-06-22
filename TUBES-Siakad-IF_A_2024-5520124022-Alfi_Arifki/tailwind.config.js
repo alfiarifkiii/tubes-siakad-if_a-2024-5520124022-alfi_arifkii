@@ -14,6 +14,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'amalfi-tile': '#2E5AA7',
+                'sea-breeze': '#86C5FF',
+                'citrus-zest': '#FFA62B',
+                'cream-gelato': '#F8E6A0',
+            }
         },
     },
 
