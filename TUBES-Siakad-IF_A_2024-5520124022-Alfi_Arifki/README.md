@@ -51,7 +51,7 @@ email : admin@siakad.com
 password : password
 
 Mahasiswa
-email : mahasiswa@siakad.com
+email : alfi@siakad.com
 password : password
 
 Link 
@@ -74,7 +74,7 @@ Berikut adalah tampilan antarmuka dari aplikasi SIAKAD Sederhana:
 ![KRS Mahasiswa](screenshot/data-mahasiswa.png)
 
 ### 5. Manajemen Mata Kuliah
-![Kelola Jadwal](screenshot/mata-kuliah.png)
+![Kelola Jadwal](screenshot/data-matakuliah.png)
 
 ### 6. Manajemen Jadwal Perkuliahan
 ![Kelola Jadwal](screenshot/jadwal.png)
