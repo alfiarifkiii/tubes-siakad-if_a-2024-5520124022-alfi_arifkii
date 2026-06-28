@@ -44,6 +44,19 @@ Sistem ini memiliki 2 jenis pengguna dengan hak akses yang diatur menggunakan *M
 
 ---
 
+## 👥 Akun dan link hosting (Role)
+
+Admin
+email : admin@siakad.com 
+password : password
+
+Mahasiswa
+email : mahasiswa@siakad.com
+password : password
+
+Link 
+http://alfiarifki.infinityfreeapp.com/login
+
 ## 📸 Dokumentasi Antarmuka (Screenshots)
 
 Berikut adalah tampilan antarmuka dari aplikasi SIAKAD Sederhana:
